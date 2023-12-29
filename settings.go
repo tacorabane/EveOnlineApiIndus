@@ -37,7 +37,6 @@ func createDefaultConfig() Config {
 		UIConfig: UIConfig{
 			ScreenSize: "1028x768",
 			Theme:      "light",
-			FontSize:   12,
 		},
 		SavedCharacters: []int{},
 	}
