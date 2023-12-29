@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 )
 
@@ -74,6 +75,13 @@ func openConfig(config Config) {
 	err = json.Unmarshal(bytes, &config)
 	if err != nil {
 		fmt.Println("Erreur lors du parsing du fichier de configuration: ", err)
+		return
+	}
+}
+
+func updateConfigHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, "Methode non authorisée", http.StatusMethodNotAllowed)
 		return
 	}
 }
