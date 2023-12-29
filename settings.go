@@ -84,4 +84,16 @@ func updateConfigHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Methode non authorisée", http.StatusMethodNotAllowed)
 		return
 	}
+
+	var config Config
+	err := json.NewDecoder(r.Body).Decode(&config)
+	if err != nil {
+		http.Error(w, "Erreur lors du parsing du JSON", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Println("Nouvelle configuration reçue: ", config)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
